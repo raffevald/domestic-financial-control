@@ -1,0 +1,43 @@
+.circularProgress {
+    position: absolute;
+    margin-top: 50%;
+    margin-left: 50%;
+    z-index: 19000;
+}
+.circularProgressTelaInteira {
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 50%;
+    z-index: 19000;
+}
+.circularchildren {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.customTable {
+    position: absolute;
+    margin-top: 01%;
+    margin-left: 50%;
+    z-index: 19000;
+}
+
+.disabledCircular {
+    display: none;
+}
+
+.loadingUnidades {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0 10px 0;
+}
+
+.loadingElement {
+    width: 10px;
+    height: 10px;
+}
+
+.textoLoading {
+    padding-left: 10px;
+}
