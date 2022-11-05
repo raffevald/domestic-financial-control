@@ -1,7 +1,3 @@
-using hfc_api.Models;
-using hfc_api.Data;
-using hfc_api.Repository.Repository.Interfaces;
-
 namespace hfc_api.Repository.Repository.Repository
 {
   public class ValoresHaPagarRepo : IValoresHaPagarRepo
@@ -31,7 +27,7 @@ namespace hfc_api.Repository.Repository.Repository
     }
 
     public async Task<ValoresHaPagar> GetValoresHaPagarId(int Id) {
-      var valorHaPagar = await _context.valores_ha_pagar.FirstOrDefaultAsync(v => v.codigo == Id);
+      var valorHaPagar = await _context!.valores_ha_pagar!.FirstOrDefaultAsync(v => v.codigo == Id);
       if (valorHaPagar == null ) {
         throw new ArgumentNullException(nameof(valorHaPagar));
       }
@@ -40,6 +36,20 @@ namespace hfc_api.Repository.Repository.Repository
 
     public async Task SaveChangesAsync() {
       await _context.SaveChangesAsync();
+    }
+
+    public IEnumerable<ValoresHaPagar> GetAllValoresHaPagarByUser(int idUser)
+    {
+      var valoresPagar = _context!.valores_ha_pagar!
+        .FromSqlRaw($"SELECT valores_ha_pagar.* FROM usuarios INNER JOIN valores_ha_pagar ON usuarios.codigo = valores_ha_pagar.fk_usuario WHERE usuarios.codigo = {idUser}")
+        .ToList();
+
+      if (valoresPagar == null)
+      {
+        throw new ArgumentNullException(nameof(valoresPagar));
+      }
+
+      return valoresPagar;
     }
   }
 }

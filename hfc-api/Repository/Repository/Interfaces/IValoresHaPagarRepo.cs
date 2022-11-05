@@ -6,6 +6,7 @@ namespace hfc_api.Repository.Repository.Interfaces
     Task SaveChangesAsync();
     Task<ValoresHaPagar> GetValoresHaPagarId(int Id);
     Task<IEnumerable<ValoresHaPagar>> GetAllValoresHaPagar();
+    IEnumerable<ValoresHaPagar> GetAllValoresHaPagarByUser(int idUser);
     Task CreateValoresHaPagar(ValoresHaPagar valoresHaPagar);
     void DeleteValoresHaPagar(ValoresHaPagar valoresHaPagar);
   }

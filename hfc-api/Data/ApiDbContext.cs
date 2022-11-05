@@ -9,7 +9,7 @@ namespace hfc_api.Data
     {
       public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options) { }
 
-      public DbSet<ValoresHaPagar> valores_ha_pagar => Set<ValoresHaPagar>();
+      public DbSet<ValoresHaPagar>? valores_ha_pagar => Set<ValoresHaPagar>();
       public DbSet<ValoresHaPagarViews>? valoreshapagar => Set<ValoresHaPagarViews>();
       public DbSet<ValoresHaPagarJaPagos>? valores_ha_pagar_ja_pagos => Set<ValoresHaPagarJaPagos>();
       public DbSet<Cartao> cartaes => Set<Cartao>();

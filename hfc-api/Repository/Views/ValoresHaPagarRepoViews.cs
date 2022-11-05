@@ -12,7 +12,7 @@ namespace hfc_api.Repository.Views
     // public async Task<IEnumerable<ValoresHaPagar>> GetAllValoresHaPagar() {
     //   return await _context.valores_ha_pagar!.ToListAsync();
     // }
-    public async Task<IEnumerable<ValoresHaPagarViews>> GetAllValoresHaPagar() {
+    public async Task<IEnumerable<ValoresHaPagarViews>> GetAllValoresHaPagarAtivos() {
       return await _context.valoreshapagar!.ToListAsync();
     }
 

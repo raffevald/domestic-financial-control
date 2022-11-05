@@ -37,13 +37,16 @@ app.UseCors(MyAllowSpecificOrigins);
 
 
 // api/valoresHaPagar
-// app.MapGet("api/valoresHaPagar", async (IValoresHaPagarRepo valoresHaPagarRepo, IMapper mapper) => {
-//   var valoresPagar = await valoresHaPagarRepo.GetAllValoresHaPagar();
-//   return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarReadDto>>(valoresPagar));
-// });
-// api/valoresHaPagar Views
-app.MapGet("api/valoresHaPagar", async (IValoresHaPagarRepoViews valoresHaPagarRepo, IMapper mapper) => {
+app.MapGet("api/valoresHaPagarByUser/{idUser}", (IValoresHaPagarRepo valoresHaPagarRepo, IMapper mapper, int idUser) => {
+  var valoresPagar = valoresHaPagarRepo.GetAllValoresHaPagarByUser(idUser);
+  return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarReadDto>>(valoresPagar));
+});
+app.MapGet("api/valoresHaPagar", async (IValoresHaPagarRepo valoresHaPagarRepo, IMapper mapper) => {
   var valoresPagar = await valoresHaPagarRepo.GetAllValoresHaPagar();
+  return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarReadDto>>(valoresPagar));
+});
+app.MapGet("api/valoresHaPagarAtivos", async (IValoresHaPagarRepoViews valoresHaPagarRepo, IMapper mapper) => {
+  var valoresPagar = await valoresHaPagarRepo.GetAllValoresHaPagarAtivos();
   return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarReadDtoViews>>(valoresPagar));
 });
 app.MapGet("api/valoresHaPagar/{id}", async (IValoresHaPagarRepo valoresHaPagarRepo, IMapper mapper, int id) => {
