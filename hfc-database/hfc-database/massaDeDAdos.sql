@@ -28,7 +28,6 @@ INSERT INTO public.valores_ha_pagar(
 		1,
 		1);
 --------------------------------------------------------------------------------------
-public.valores_ha_pagar_ja_pagos
 INSERT INTO public.valores_ha_pagar_ja_pagos(
 	data_pagamento, data_cadastro, valor_pago, fk_valores_ha_pagar)
 	VALUES ('2022-11-01', '2022-11-01', 1000, 74);
@@ -57,3 +56,4 @@ INSERT INTO public.meio_de_pagamento(
 	data_cadastro, fk_cartao, fk_tipo_de_cartao)
 	VALUES ('2022-11-04', 2, 1);
 
+--
