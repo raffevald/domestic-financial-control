@@ -11,3 +11,4 @@ global using hfc_api.Dtos.Dtos.ValoresHaPagar;
 global using hfc_api.Repository.Repository.Interfaces.CartaoMeioDePagamento;
 global using hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento;
 global using hfc_api.Dtos.Dtos.CartaoMeioDePagamento;
+
