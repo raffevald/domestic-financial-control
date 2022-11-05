@@ -4,7 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const ValorHaPagar = createSlice({
   name: "valorHaPagar",
   initialState: {
-    dados: null,
+    dados: [],
+    dadosAtivos: [],
     dadosById: {
       data_vencimento : "",
       valor_total: "",
@@ -19,6 +20,9 @@ export const ValorHaPagar = createSlice({
   reducers: {
     fetchValorHaPagar: (state, action) => {
       state.dados = action.payload
+    },
+    fetchValorHaPagarAtivos: (state, action) => {
+      state.dadosAtivos = action.payload
     },
     fetchValorHaPagarById: (state, action) => {
       state.dadosById = action.payload
@@ -36,7 +40,8 @@ export const {
   fetchValorHaPagar,
   fetchValorHaPagarById,
   fetchModalControllerValorHaPagarByIdEditando,
-  fetchModalControllerValorHaPagarIsEditando
+  fetchModalControllerValorHaPagarIsEditando,
+  fetchValorHaPagarAtivos
 } = ValorHaPagar.actions;
 
 

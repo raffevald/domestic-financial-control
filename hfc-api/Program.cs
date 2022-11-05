@@ -35,7 +35,6 @@ var app = builder.Build();
 //app cors
 app.UseCors(MyAllowSpecificOrigins);
 
-
 // api/valoresHaPagar
 app.MapGet("api/valoresHaPagarByUser/{idUser}", (IValoresHaPagarRepo valoresHaPagarRepo, IMapper mapper, int idUser) => {
   var valoresPagar = valoresHaPagarRepo.GetAllValoresHaPagarByUser(idUser);
