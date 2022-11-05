@@ -18,7 +18,7 @@ CREATE TABlE usuarios (
 	email VARCHAR(200),
 	senha VARCHAR(250),
 	avatarUrl VARCHAR(250),
-	fk_perfil_usuario INTEGER,
+	fk_perfil_usuario INTEGER NOT NULL,
 	
 	CONSTRAINT usuarios_primary_key PRIMARY KEY (codigo),
 	
@@ -36,7 +36,7 @@ CREATE TABLE valores_ha_pagar(
 	Parcelas_Pagas INTEGER,
 	status_dados INTEGER  NOT NULL,
 	
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT valores_ha_pagar_primary_key PRIMARY KEY (codigo)
 );
@@ -48,7 +48,7 @@ CREATE TABLE valores_ha_pagar_ja_pagos(
 	valor_pago NUMERIC(10,2) NOT NULL,
 
 	fk_valores_ha_pagar INTEGER NOT NULL,
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 
 	CONSTRAINT valores_ha_pagar_ja_pagos_primary_key PRIMARY KEY (codigo),
@@ -60,7 +60,7 @@ CREATE TABLE cartaes(
 	data_cadastro DATE NOT NULL,
 	descricao VARCHAR(30) NOT NULL,
 	
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT cartaes_primary_key PRIMARY KEY (codigo)
 );
@@ -70,7 +70,7 @@ CREATE TABLE tipo_de_cartaes(
 	data_cadastro DATE NOT NULL,
 	descricao VARCHAR(30) NOT NULL,
 
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT tipo_de_cartaes_primary_key PRIMARY KEY (codigo)
 );
@@ -80,7 +80,7 @@ CREATE TABLE meio_de_pagamento(
 	data_cadastro DATE NOT NULL,
 	fk_cartao INTEGER,
 	fk_tipo_de_cartao INTEGER,
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT meio_pagamento_primary_key PRIMARY KEY (codigo),
 
@@ -97,7 +97,7 @@ CREATE TABLE categoria(
 	codigo SERIAL NOT NULL,
 	data_cadastro DATE NOT NULL,
 	descricao VARCHAR(30) NOT NULL,
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT categoria_primary_key PRIMARY KEY (codigo)
 );
@@ -106,7 +106,7 @@ CREATE TABLE categoria_sub(
 	codigo SERIAL NOT NULL,
 	data_cadastro DATE NOT NULL,
 	descricao VARCHAR(30) NOT NULL,
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT categoria_sub_primary_key PRIMARY KEY (codigo)
 );
@@ -117,7 +117,7 @@ CREATE TABLE categoria_e_sub_categoria(
 	fk_categoria INTEGER,
 	
 	fk_ategoria_sub INTEGER,
-	fk_usuario INTEGER,
+	fk_usuario INTEGER  NOT NULL,
 	FOREIGN KEY (fk_usuario) REFERENCES usuarios(Codigo),
 	CONSTRAINT categoria_e_sub_categoria_primary_key PRIMARY KEY (codigo),
 

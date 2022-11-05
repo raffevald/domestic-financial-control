@@ -14,7 +14,6 @@ INSERT INTO public.usuarios(
 		1);
 
 -------------------------------------------------------------------------------------
-public.valores_ha_pagar
 INSERT INTO public.valores_ha_pagar(
 	status, data_vencimento, valor_total, descricao, data_cadastro, parcelas_totais, parcelas_pagas, status_dados, fk_usuario)
 	VALUES (
