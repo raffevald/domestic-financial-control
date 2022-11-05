@@ -4,47 +4,38 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchGetValorHaPagar
-} from "../../store/fetchActions/fetchValorHaPagarActions";
+// import {
+//   fetchGetValorHaPagar
+// } from "../../store/fetchActions/fetchValorHaPagarActions";
 // import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 // import EditAttributesOutlinedIcon from '@mui/icons-material/EditAttributesOutlined';
 
 
-export const ExpensesDataGrid = ({handleModalExcluirSaida, handleModalEditarSaida, dados, handleModalValorJaPago, handleModalValorPago, gridCompleta }) => {
+export const ExpensesDataGrid = ({handleModalExcluirSaida, handleModalEditarSaida, handleModalValorJaPago, handleModalValorPago, gridCompleta }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const valorHaPagar = useSelector((state) => state.valorHaPagarDatas?.dados);
+  const valorHaPagar = useSelector((state) => state?.valorHaPagarDatas?.dadosAtivos);
 
-  // const [dadosValorHaPagar, setDadosValorHaPagar]  = useState();
-
-
-  const dadosTratados = [];
-  for (let i = 0; i < valorHaPagar?.length; i++) {
-    dadosTratados.push({
-      id: valorHaPagar[i].codigo,
-      data_de_cadastro: `${valorHaPagar[i].data_cadastro[0]}${valorHaPagar[i].data_cadastro[1]}${valorHaPagar[i].data_cadastro[2]}${valorHaPagar[i].data_cadastro[3]}${valorHaPagar[i].data_cadastro[4]}${valorHaPagar[i].data_cadastro[5]}${valorHaPagar[i].data_cadastro[6]}${valorHaPagar[i].data_cadastro[7]}${valorHaPagar[i].data_cadastro[8]}${valorHaPagar[i].data_cadastro[9]}`,
-      data_vencimento: `${valorHaPagar[i].data_vencimento[0]}${valorHaPagar[i].data_vencimento[1]}${valorHaPagar[i].data_vencimento[2]}${valorHaPagar[i].data_vencimento[3]}${valorHaPagar[i].data_vencimento[4]}${valorHaPagar[i].data_vencimento[5]}${valorHaPagar[i].data_vencimento[6]}${valorHaPagar[i].data_vencimento[7]}${valorHaPagar[i].data_vencimento[8]}${valorHaPagar[i].data_vencimento[9]}`,
-      valor_total: `R$ ${valorHaPagar[i].valor_total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`,
-      parcelas_totais: valorHaPagar[i].parcelas_totais,
-      parcelas_pagas: valorHaPagar[i].parcelas_pagas,
-      descricao: valorHaPagar[i].descricao,
-      statos: valorHaPagar[i].status,
-      excluir: valorHaPagar[i].codigo,
-      editar: valorHaPagar[i].codigo,
-      valor_pago: `R$ ${valorHaPagar[i].valor_total_pago.toLocaleString('pt-br', {minimumFractionDigits: 2})}`,
-    });
+  const handleDadosTratados = () => {
+    const dadosTratados = [];
+    for (let i = 0; i < valorHaPagar?.length; i++) {
+      dadosTratados.push({
+        id: valorHaPagar[i].codigo,
+        data_de_cadastro: `${valorHaPagar[i].data_cadastro[0]}${valorHaPagar[i].data_cadastro[1]}${valorHaPagar[i].data_cadastro[2]}${valorHaPagar[i].data_cadastro[3]}${valorHaPagar[i].data_cadastro[4]}${valorHaPagar[i].data_cadastro[5]}${valorHaPagar[i].data_cadastro[6]}${valorHaPagar[i].data_cadastro[7]}${valorHaPagar[i].data_cadastro[8]}${valorHaPagar[i].data_cadastro[9]}`,
+        data_vencimento: `${valorHaPagar[i].data_vencimento[0]}${valorHaPagar[i].data_vencimento[1]}${valorHaPagar[i].data_vencimento[2]}${valorHaPagar[i].data_vencimento[3]}${valorHaPagar[i].data_vencimento[4]}${valorHaPagar[i].data_vencimento[5]}${valorHaPagar[i].data_vencimento[6]}${valorHaPagar[i].data_vencimento[7]}${valorHaPagar[i].data_vencimento[8]}${valorHaPagar[i].data_vencimento[9]}`,
+        valor_total: `R$ ${valorHaPagar[i].valor_total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`,
+        parcelas_pagas: valorHaPagar[i].parcelas_pagas,
+        descricao: valorHaPagar[i].descricao,
+        statos: valorHaPagar[i].status,
+        excluir: valorHaPagar[i].codigo,
+        editar: valorHaPagar[i].codigo,
+        valor_pago: `R$ ${valorHaPagar[i].valor_total_pago.toLocaleString('pt-br', {minimumFractionDigits: 2})}`,
+      });
+    };
+    return dadosTratados;
   };
-  // dispatch(fetchGetValorHaPagar());
-  // React.useEffect(() => {
-    
-  // }, [ valorHaPagar, dadosTratados]);
-
-  React.useEffect(() => {
-    dispatch(fetchGetValorHaPagar());
-  },[dispatch]);
 
   const columns = [
     {
@@ -272,7 +263,7 @@ export const ExpensesDataGrid = ({handleModalExcluirSaida, handleModalEditarSaid
 
   return (
     <DataGrid
-      rows={dadosTratados}
+      rows={handleDadosTratados()}
       columns={columns}
       components={{ Toolbar: GridToolbar }}
     />

@@ -7,7 +7,8 @@ import {
   fetchGetByIdValorHaPagarActions,
   // fetchPutValoresHaPagarInativacoaActions,
   fetchDeleteValorHaPagarActions,
-  fetchGetValorHaPagar
+  fetchGetValorHaPagar,
+  fetchGetValorHaPagarAtivos
 } from "../../store/fetchActions/fetchValorHaPagarActions";
 import {
   fetchModalController
@@ -44,7 +45,7 @@ export const Expenses = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalCadastrar, setOpenModalCadastrar] = useState(false);
   const [modalDeInserirValorPago, setModalDeInserirValorPago] = useState(false);
-  const [gridCompleta, setGridCompleta] = useState(false);
+  // const [gridCompleta, setGridCompleta] = useState(false);
   const [codigoDoValorHaPagarJaPago, setCodigoDoValorHaPagarJaPago] = useState();
   const [codigoDoValorHaPagarHaInativar, setCodigoDoValorHaPagarHaInativar] = useState();
   const [codigoDoValorDeListagemDosValoresPagos, setCodigoDoValorDeListagemDosValoresPagos] = useState();
@@ -56,7 +57,7 @@ export const Expenses = () => {
   },[modalControler]);
 
   React.useEffect(() => {
-    dispatch(fetchGetValorHaPagar());
+    dispatch(fetchGetValorHaPagarAtivos());
   },[dispatch]);
 
   const handleClose = () => setOpenModal(false);
@@ -122,7 +123,7 @@ export const Expenses = () => {
   };
 
   const handleGridCompletada = () => {
-    setGridCompleta(true);
+    // setGridCompleta(true);
   }
 
   return (
@@ -187,7 +188,7 @@ export const Expenses = () => {
           handleModalEditarSaida={handleModalEditarSaida}
           handleModalValorJaPago={handleModalValorJaPago}
           handleModalValorPago={handleModalListagemValorPago}
-          gridCompleta={gridCompleta}
+          // gridCompleta={gridCompleta}
         />
         
         <ModalDeExclusao

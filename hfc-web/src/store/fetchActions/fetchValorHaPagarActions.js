@@ -1,5 +1,5 @@
 import { http } from '../../services/axios';
-import { fetchValorHaPagar, fetchValorHaPagarById } from '../ducks/valorHaPagarDucks';
+import { fetchValorHaPagar, fetchValorHaPagarById, fetchValorHaPagarAtivos } from '../ducks/valorHaPagarDucks';
 import { getAllValorHaPagar } from '../ducks/valorHaPagarDucks';
 import { startLoading, endLoading } from '../ducks/loadingDucks';
 
@@ -16,6 +16,20 @@ export const fetchGetValorHaPagar = () => {
       })
   };
 };
+
+export const fetchGetValorHaPagarAtivos = () => {
+  return dispatch => {
+    http
+      .get(`/valoresHaPagarAtivos`)
+      .then(res => {
+        dispatch(fetchValorHaPagarAtivos(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
+};
+
 
 export const fetchPostValorHaPagarActions = (values) => {
   return dispatch => {
