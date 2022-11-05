@@ -1,6 +1,7 @@
 
 # Builds
 /bin
+/obj
 
 # arquivos de secrets
 .appsettings.Development.json
