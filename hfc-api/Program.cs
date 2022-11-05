@@ -1,16 +1,3 @@
-using AutoMapper;
-using hfc_api.Data;
-using hfc_api.Models.CartaoMeioDePagamento;
-using hfc_api.Dtos.Views;
-using hfc_api.Dtos.Dtos.ValoresHaPagarJaPagos;
-using hfc_api.Models;
-using hfc_api.Repository.Views;
-using hfc_api.Repository.Repository.Interfaces;
-using hfc_api.Repository.Repository.Repository;
-using hfc_api.Dtos.Dtos.ValoresHaPagar;
-using hfc_api.Repository.Repository.Interfaces.CartaoMeioDePagamento;
-using hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento;
-using hfc_api.Dtos.Dtos.CartaoMeioDePagamento;
 
 var builder = WebApplication.CreateBuilder(args);
 
