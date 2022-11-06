@@ -2,18 +2,20 @@ import React, { useEffect , useState} from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { tokens } from "../../theme";
 import { useSelector, useDispatch } from "react-redux";
+
+import { ModalForm } from './ModalForm';
 import Header from '../../components/header';
+import { ExpensesDataGrid } from './ExpensesDataGrid';
+import { ModalDeExclusao } from '../../components/modalDeExclusao';
+import { ModalDeInserirValorPago } from '../../components/modalDeInserirValorPago';
+
 import {
   fetchModalController
 } from '../../store/ducks/modalControlerDucks';
-import { ModalDeExclusao } from '../../components/modalDeExclusao';
-import { ModalForm } from './ModalForm';
 import {
   fetchModalControllerValorHaPagarByIdEditando,
   fetchModalControllerValorHaPagarIsEditando
 } from '../../store/ducks/valorHaPagarDucks';
-import { ExpensesDataGrid } from './ExpensesDataGrid';
-import { ModalDeInserirValorPago } from '../../components/modalDeInserirValorPago';
 import {
   fetchValoresHaPagarJaPagosModal,
   fetchModalControllerValoresHaPagarJaPagos
@@ -21,7 +23,6 @@ import {
 import { ModalAmountsPayableAlreadyPaid } from './AmountsPayableAlreadyPaid/index';
 import { fetchGetListaDeValoresJaPagos } from '../../store/fetchActions/fetchValoresHaPagarJaPagosActions';
 import {
-  fetchGetValorHaPagar,
   fetchDeleteValorHaPagarActions,
   fetchGetByIdValorHaPagarActions,
   fetchGetValoresHaPagarAtivosByUserActions
@@ -58,7 +59,7 @@ export const Expenses = () => {
 
   React.useEffect(() => {
     dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo));
-  },[dispatch]);
+  },[dispatch, usuarioLogado.codigo]);
 
   const handleClose = () => setOpenModal(false);
 
@@ -78,19 +79,10 @@ export const Expenses = () => {
     setCodigoDoValorHaPagarHaSerDeletado(idLinha);
     setCodigoDoValorHaPagarHaInativar(idLinha);
     setOpenModal(true);
-    // setIdASerExcluido(idLinha);
   };
 
   const handleExcluirSaida = () => {
     dispatch(fetchDeleteValorHaPagarActions(codigoDoValorHaPagarHaSerDeletado));
-    // const dadoHaInativar = [
-    //   {
-    //     "status_dados": 2,
-    //   }
-    // ];
-    // dispatch(fetchPutValoresHaPagarInativacoaActions(codigoDoValorHaPagarHaInativar, dadoHaInativar[0]));
-    
-    dispatch(fetchGetValorHaPagar());
     setOpenModal(false);
   };
 
