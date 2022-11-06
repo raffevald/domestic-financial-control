@@ -4,13 +4,6 @@ import { tokens } from "../../theme";
 import { useSelector, useDispatch } from "react-redux";
 import Header from '../../components/header';
 import {
-  fetchGetByIdValorHaPagarActions,
-  // fetchPutValoresHaPagarInativacoaActions,
-  fetchDeleteValorHaPagarActions,
-  fetchGetValorHaPagar,
-  fetchGetValorHaPagarAtivos
-} from "../../store/fetchActions/fetchValorHaPagarActions";
-import {
   fetchModalController
 } from '../../store/ducks/modalControlerDucks';
 import { ModalDeExclusao } from '../../components/modalDeExclusao';
@@ -27,6 +20,12 @@ import {
 } from '../../store/ducks/valoresHaPagarJaPagos';
 import { ModalAmountsPayableAlreadyPaid } from './AmountsPayableAlreadyPaid/index';
 import { fetchGetListaDeValoresJaPagos } from '../../store/fetchActions/fetchValoresHaPagarJaPagosActions';
+import {
+  fetchGetValorHaPagar,
+  fetchDeleteValorHaPagarActions,
+  fetchGetByIdValorHaPagarActions,
+  fetchGetValoresHaPagarAtivosByUserActions
+} from '../../store/fetchActions/fetchValorHaPagarActions';
 
 
 import './styles.css';
@@ -39,6 +38,7 @@ export const Expenses = () => {
   
   const modalControler = useSelector((state) => state.modalController.modalIsOpen);
   const modalListagemDeValoresPagos = useSelector((state) => state.valoresHaPagarJaPagos?.modalAmountsPayableAlreadyPaid);
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
   // const { loadingDefault } = useSelector((state) => state.loading?.status);
 
 
@@ -57,7 +57,7 @@ export const Expenses = () => {
   },[modalControler]);
 
   React.useEffect(() => {
-    dispatch(fetchGetValorHaPagarAtivos());
+    dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo));
   },[dispatch]);
 
   const handleClose = () => setOpenModal(false);

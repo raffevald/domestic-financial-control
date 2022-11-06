@@ -16,7 +16,9 @@ export const ExpensesDataGrid = ({handleModalExcluirSaida, handleModalEditarSaid
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const valorHaPagar = useSelector((state) => state?.valorHaPagarDatas?.dadosAtivos);
+  // const usuarioLogado = useSelector((state) => state.userDatas.values);
+  const valorHaPagar = useSelector((state) => state?.valorHaPagarDatas?.valoresAPagarByUserAtivos);
+
 
   const handleDadosTratados = () => {
     const dadosTratados = [];

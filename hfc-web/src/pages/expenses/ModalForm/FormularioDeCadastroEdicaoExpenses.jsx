@@ -18,6 +18,7 @@ export const FormularioDeCadastroEdicaoExpenses = ({ titulo="", subtitle="", dad
 
   const isEditando = useSelector((state) => state?.valorHaPagarDatas?.valorHaPagarIsEditando);
   const idLinhaEditar = useSelector((state) => state?.valorHaPagarDatas?.idValorHaPagarEditando);
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
 
   const handleFormSubmit = (values) => {
     const newValues = [];
@@ -30,11 +31,12 @@ export const FormularioDeCadastroEdicaoExpenses = ({ titulo="", subtitle="", dad
       valor_total: parseFloat(values.valor_total),
       status: "Em aberto",
       status_dados: parseInt(1),
+
     });
     
     if (isEditando) {
       dispatch(fetchPutValorHaPagarActions(idLinhaEditar, newValues[0]));
-      dispatch(fetchGetValorHaPagar());
+      // dispatch(fetchGetValorHaPagar());
     } else {
       dispatch(fetchPostValorHaPagarActions(newValues[0]));
     }
