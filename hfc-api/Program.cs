@@ -118,10 +118,6 @@ app.MapDelete("api/valoresHaPagar/{id}", async (IValoresHaPagarRepo valoresHaPag
 
 
 // api/valoresHaPagarJaPagos
-app.MapGet("api/valoresHaPagarJaPagos/{id}", (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id) => {
-  var valoresHaPagarJaPagos = valoresHaPagarJaPagosRepo.GetAllValoresHaPagarJaPagos(id);
-  return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarJaPagosReadDto>>(valoresHaPagarJaPagos));
-});
 app.MapPost("api/valoresHaPagarJaPagos", async (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, ValoresHaPagarJaPagosCreateDto valoresHaPagarJaPagosCreateDto) => {
   var valorHaPagarJaPagosModel = mapper.Map<ValoresHaPagarJaPagos>(valoresHaPagarJaPagosCreateDto);
   await valoresHaPagarJaPagosRepo.CreateValoresHaPagarJaPagos(valorHaPagarJaPagosModel);
@@ -129,24 +125,28 @@ app.MapPost("api/valoresHaPagarJaPagos", async (IValoresHaPagarJaPagosRepo valor
   var valorHaPagarJaPagosRead = mapper.Map<ValoresHaPagarJaPagosReadDto>(valorHaPagarJaPagosModel);
   return Results.Created($"api/valoresHaPagarJaPagos/{valorHaPagarJaPagosRead.codigo}", valorHaPagarJaPagosRead);
 });
-app.MapDelete("api/valoresHaPagarJaPagos/{id}", async (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id) => {
-  var valorPagarJaPago = await valoresHaPagarJaPagosRepo.GetValoresHaPagarJaPagosId(id);
-  if(valorPagarJaPago == null) {
-    return Results.NotFound();
-  }
-  valoresHaPagarJaPagosRepo.DeleteValoresHaPagar(valorPagarJaPago);
-  await valoresHaPagarJaPagosRepo.SaveChangesAsync();
-  return Results.Ok("Deleção bem sucedida");
-});
-app.MapPut("api/valoresHaPagarJaPagos/{id}", async (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id, ValoresHaPagarJaPagosUpdateDto valoresHaPagarJaPagosUpdateDto) => {
-  var valorHaPagarJaPagos = await valoresHaPagarJaPagosRepo.GetValoresHaPagarJaPagosId(id);
-  if(valorHaPagarJaPagos == null) {
-    return Results.NotFound();
-  }
-  mapper.Map(valoresHaPagarJaPagosUpdateDto, valorHaPagarJaPagos);
-  await valoresHaPagarJaPagosRepo.SaveChangesAsync();
-  return Results.NoContent();
-});
+// app.MapGet("api/valoresHaPagarJaPagos/{id}", (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id) => {
+//   var valoresHaPagarJaPagos = valoresHaPagarJaPagosRepo.GetAllValoresHaPagarJaPagos(id);
+//   return Results.Ok(mapper.Map<IEnumerable<ValoresHaPagarJaPagosReadDto>>(valoresHaPagarJaPagos));
+// });
+// app.MapDelete("api/valoresHaPagarJaPagos/{id}", async (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id) => {
+//   var valorPagarJaPago = await valoresHaPagarJaPagosRepo.GetValoresHaPagarJaPagosId(id);
+//   if(valorPagarJaPago == null) {
+//     return Results.NotFound();
+//   }
+//   valoresHaPagarJaPagosRepo.DeleteValoresHaPagar(valorPagarJaPago);
+//   await valoresHaPagarJaPagosRepo.SaveChangesAsync();
+//   return Results.Ok("Deleção bem sucedida");
+// });
+// app.MapPut("api/valoresHaPagarJaPagos/{id}", async (IValoresHaPagarJaPagosRepo valoresHaPagarJaPagosRepo, IMapper mapper, int id, ValoresHaPagarJaPagosUpdateDto valoresHaPagarJaPagosUpdateDto) => {
+//   var valorHaPagarJaPagos = await valoresHaPagarJaPagosRepo.GetValoresHaPagarJaPagosId(id);
+//   if(valorHaPagarJaPagos == null) {
+//     return Results.NotFound();
+//   }
+//   mapper.Map(valoresHaPagarJaPagosUpdateDto, valorHaPagarJaPagos);
+//   await valoresHaPagarJaPagosRepo.SaveChangesAsync();
+//   return Results.NoContent();
+// });
 
 
 // api/cartao/tipo/meioDePagamento
