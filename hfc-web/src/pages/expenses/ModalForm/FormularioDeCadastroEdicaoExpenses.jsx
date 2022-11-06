@@ -3,11 +3,12 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
+
 import Header from '../../../components/header';
+
 import {
   fetchPostValorHaPagarActions,
   fetchPutValorHaPagarActions,
-  fetchGetValorHaPagar,
 } from '../../../store/fetchActions/fetchValorHaPagarActions';
 import { fetchModalController } from '../../../store/ducks/modalControlerDucks';
 
@@ -31,12 +32,11 @@ export const FormularioDeCadastroEdicaoExpenses = ({ titulo="", subtitle="", dad
       valor_total: parseFloat(values.valor_total),
       status: "Em aberto",
       status_dados: parseInt(1),
-
+      fk_usuario: usuarioLogado.codigo
     });
     
     if (isEditando) {
       dispatch(fetchPutValorHaPagarActions(idLinhaEditar, newValues[0]));
-      // dispatch(fetchGetValorHaPagar());
     } else {
       dispatch(fetchPostValorHaPagarActions(newValues[0]));
     }

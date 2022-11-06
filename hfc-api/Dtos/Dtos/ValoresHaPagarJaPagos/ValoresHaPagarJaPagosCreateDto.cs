@@ -13,5 +13,7 @@ namespace hfc_api.Dtos.Dtos.ValoresHaPagarJaPagos
     public float valor_pago {get; set; }
     [Required]
     public int fk_valores_ha_pagar {get; set; }
+    [Required]
+    public int fk_usuario { get; set; }
   }
 }

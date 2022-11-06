@@ -1,18 +1,12 @@
-import React, {useState, useMemo } from "react";
+import React from "react";
 import { Box, useTheme, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   fetchGetValorHaPagar
-// } from "../../store/fetchActions/fetchValorHaPagarActions";
-// import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-// import EditAttributesOutlinedIcon from '@mui/icons-material/EditAttributesOutlined';
 
 
 export const ExpensesDataGrid = ({handleModalExcluirSaida, handleModalEditarSaida, handleModalValorJaPago, handleModalValorPago, gridCompleta }) => {
-  const dispatch = useDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

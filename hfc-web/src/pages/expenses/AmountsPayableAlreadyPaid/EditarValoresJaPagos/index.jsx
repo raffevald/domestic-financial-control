@@ -3,9 +3,10 @@ import { FormDeInserirValorPago } from './EditarVarJaPagos';
 import { useSelector } from "react-redux";
 
 
-export const ModalDeInserirEditarValorPago = ({ opelModal, closeModal, handleYes, codigoValorHaSerPagoJaPago, controlerEdicaoOuInsert, codigoEdicao }) => {
+export const ModalDeInserirEditarValorPago = ({ opelModal, codigoValorHaSerPagoJaPago, controlerEdicaoOuInsert, codigoEdicao }) => {
   
   const modalEdicaoValorJaPago = useSelector((state) => state.valoresHaPagarJaPagos?.modalEdicaoValorJaPago);
+
 
   const style = {
     position: 'absolute',

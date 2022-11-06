@@ -2,16 +2,19 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import Header from "../header";
+
 import { fetchPostValoresHaPagarJaPagosActions } from '../../store/fetchActions/fetchValoresHaPagarJaPagosActions';
 import { fetchModalControllerValoresHaPagarJaPagos } from '../../store/ducks/valoresHaPagarJaPagos';
-import {
-  fetchGetValorHaPagar
-} from "../../store/fetchActions/fetchValorHaPagarActions";
+
 
 export const FormDeInserirValorPago = ({ titulo="", subtitle="", codigoValorHaSerPagoJaPago }) => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
 
   const handleFormSubmit = (values) => {
     let data = new Date();
@@ -26,11 +29,11 @@ export const FormDeInserirValorPago = ({ titulo="", subtitle="", codigoValorHaSe
       data_pagamento: values.data_pagamento,
       fk_valores_ha_pagar: parseInt(codigoValorHaSerPagoJaPago),
       valor_pago: parseFloat(values.valor_pago),
+      fk_usuario: usuarioLogado.codigo
     });
     
     dispatch(fetchPostValoresHaPagarJaPagosActions(newValues[0]));
     dispatch(fetchModalControllerValoresHaPagarJaPagos(false));
-    dispatch(fetchGetValorHaPagar());
   };
 
   const handleCloseModal = () => {
@@ -39,7 +42,7 @@ export const FormDeInserirValorPago = ({ titulo="", subtitle="", codigoValorHaSe
 
   return (
     <Box m="20px">
-      {/* <Header title={titulo} subtitle={subtitle} /> */}
+      <Header title={titulo} subtitle={subtitle} />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}

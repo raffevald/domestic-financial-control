@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Button } from "@mui/material";
-import Modal from '@mui/material/Modal';
-import { AmountsPayableAlreadyPaidDataGrid } from './AmountsPayableAlreadyPaidDataGrid';
+import { Button, Modal } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+
+import { ModalDeExclusao } from '../../../components/modalDeExclusao';
+import { ModalDeInserirEditarValorPago } from './EditarValoresJaPagos';
+import { AmountsPayableAlreadyPaidDataGrid } from './AmountsPayableAlreadyPaidDataGrid';
+
 import {
   fetchValoresHaPagarJaPagosModal,
   fetchValorHaPagarJaPagoModalExclusao,
   fetchValorHaPagarJaPagoModalEdicao
 } from '../../../store/ducks/valoresHaPagarJaPagos';
-import { ModalDeExclusao } from '../../../components/modalDeExclusao';
 import {
   fetchDeleteValorHaPagarJaPagoActions,
 } from '../../../store/fetchActions/fetchValoresHaPagarJaPagosActions';
-import { ModalDeInserirEditarValorPago } from './EditarValoresJaPagos';
 
 
 export const ModalAmountsPayableAlreadyPaid = ({ openModal }) => {
@@ -73,7 +74,6 @@ export const ModalAmountsPayableAlreadyPaid = ({ openModal }) => {
     dispatch(fetchValorHaPagarJaPagoModalEdicao(true));
     setControlerEdicaoOuInsert('edicao');
     setCodigoEdicao(idLinha);
-    // fetchPutValoresHaPagarActions
   }
 
   return (
