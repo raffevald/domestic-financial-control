@@ -22,12 +22,14 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
   options.UseNpgsql(builder.Configuration.GetConnectionString("Default")); 
 });
 builder.Services.AddScoped<IValoresHaPagarRepo, ValoresHaPagarRepo>();
+// builder.Services.AddEndpointDefinitions();
 builder.Services.AddScoped<IValoresHaPagarRepoViews, ValoresHaPagarRepoViews>();
 builder.Services.AddScoped<IValoresHaPagarJaPagosRepo, ValoresHaPagarJaPagosRepo>();
 builder.Services.AddScoped<IMeioDePagamentoViewsRepo, MeioDePagamentoViewsRepo>();
 builder.Services.AddScoped<ICartaoRepo, CartaoRepo>();
 builder.Services.AddScoped<ITipoDeCartaoRepo, TipoDeCartaoRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 //App builder
 var app = builder.Build();
