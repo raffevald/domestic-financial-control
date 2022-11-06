@@ -15,6 +15,7 @@ namespace hfc_api.Models
     public int parcelas_totais { get; set; }
     public int parcelas_pagas { get; set; }
     public int status_dados { get; set; }
+    [Required]
     public int fk_usuario { get; set; }
   }
 }
