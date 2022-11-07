@@ -13,5 +13,7 @@ namespace hfc_api.Dtos.Dtos.ValoresHaPagar
     public int parcelas_totais { get; set; }
     public int parcelas_pagas { get; set; }
     public int status_dados { get; set; }
+    [Required]
+    public int fk_usuario { get; set; }
   }
 }

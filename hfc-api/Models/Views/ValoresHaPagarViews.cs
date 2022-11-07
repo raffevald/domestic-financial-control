@@ -15,5 +15,6 @@ namespace hfc_api.Models.Views
     public int parcelas_totais { get; set; }
     public int parcelas_pagas { get; set; }
     public int valor_total_pago { get; set; }
+    public int usecode { get; set; }
   }
 }

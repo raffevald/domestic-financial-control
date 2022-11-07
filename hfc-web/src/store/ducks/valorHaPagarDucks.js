@@ -16,6 +16,10 @@ export const ValorHaPagar = createSlice({
     },
     idValorHaPagarEditando: null,
     valorHaPagarIsEditando: false,
+
+    valoresAPagarByUser: [],
+    valoresAPagarByUserAtivos:[],
+    
   },
   reducers: {
     fetchValorHaPagar: (state, action) => {
@@ -33,6 +37,13 @@ export const ValorHaPagar = createSlice({
     fetchModalControllerValorHaPagarIsEditando: (state, action) => {
       state.valorHaPagarIsEditando = action.payload
     },
+
+    fetchValorHaPagarByUser: (state, action) => {
+      state.valoresAPagarByUser = action.payload
+    },
+    fetchValorHaPagarAtivosByUser: (state, action) => {
+      state.valoresAPagarByUserAtivos = action.payload
+    },
   }
 });
 
@@ -41,7 +52,9 @@ export const {
   fetchValorHaPagarById,
   fetchModalControllerValorHaPagarByIdEditando,
   fetchModalControllerValorHaPagarIsEditando,
-  fetchValorHaPagarAtivos
+  fetchValorHaPagarAtivos,
+  fetchValorHaPagarByUser,
+  fetchValorHaPagarAtivosByUser
 } = ValorHaPagar.actions;
 
 

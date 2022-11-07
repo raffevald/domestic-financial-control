@@ -1,9 +1,94 @@
 import { http } from '../../services/axios';
-import { fetchValorHaPagar, fetchValorHaPagarById, fetchValorHaPagarAtivos } from '../ducks/valorHaPagarDucks';
-import { getAllValorHaPagar } from '../ducks/valorHaPagarDucks';
+import {
+  fetchValorHaPagar,
+  fetchValorHaPagarById,
+  fetchValorHaPagarAtivos,
+  fetchValorHaPagarByUser,
+  fetchValorHaPagarAtivosByUser
+} from '../ducks/valorHaPagarDucks';
 import { startLoading, endLoading } from '../ducks/loadingDucks';
 
 
+export const fetchGetValoresHaPagarByUserActions = (idUser) => {
+  const LOADING_IDENTIFICATOR = 'loadingValoresAPagarByUser';
+
+  return dispatch => {
+    dispatch(startLoading(LOADING_IDENTIFICATOR));
+    http
+      .get(`/valoresHaPagarByUser/${idUser}`)
+      .then(res => {
+        dispatch(fetchValorHaPagarByUser(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => {
+        dispatch(endLoading(LOADING_IDENTIFICATOR));
+      });
+  };
+};
+
+export const fetchGetValoresHaPagarAtivosByUserActions = (idUser) => {
+  const LOADING_IDENTIFICATOR = 'loadingValoresAPagarAtivosByUser';
+
+  return dispatch => {
+    dispatch(startLoading(LOADING_IDENTIFICATOR));
+    http
+      .get(`/valoresHaPagarAtivosByUser/${idUser}`)
+      .then(res => {
+        dispatch(fetchValorHaPagarAtivosByUser(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => {
+        dispatch(endLoading(LOADING_IDENTIFICATOR));
+      });
+  };
+};
+
+export const fetchDeleteValorHaPagarActions = (id) => {
+  const LOADING_IDENTIFICATOR = 'loadingDeletarValoresAPagar';
+
+  return dispatch => {
+    dispatch(startLoading(LOADING_IDENTIFICATOR));
+    http
+      .delete(`/valoresHaPagar/${id}`)
+      .then(res => {
+        if (res.statos === 200) {
+          console.log("Dado deletado com sucesso")
+        };
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+      .finally(() => {
+        dispatch(endLoading(LOADING_IDENTIFICATOR));
+      });
+  };
+};
+
+export const fetchPutValoresHaPagarInativacoaActions = (id, values) => {
+  const LOADING_IDENTIFICATOR = 'loadingEdicaoValoresAPagar';
+  return dispatch => {
+    dispatch(startLoading(LOADING_IDENTIFICATOR));
+    http
+      .put(`/valoresHaPagarInativacao/${id}`, values)
+      .then(res => {
+        if (res.status === 200) {
+          console.log("Dado cadastro com sucesso")
+        }
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+      .finally(() => {
+        dispatch(endLoading(LOADING_IDENTIFICATOR));
+      });
+  };
+};
+
+//---------------------------------------------------------
 export const fetchGetValorHaPagar = () => {
   return dispatch => {
     http
@@ -46,20 +131,7 @@ export const fetchPostValorHaPagarActions = (values) => {
   };
 };
 
-export const fetchDeleteValorHaPagarActions = (id) => {
-  return dispatch => {
-    http
-      .delete(`/valoresHaPagar/${id}`)
-      .then(res => {
-        if (res.statos === 200) {
-          console.log("Dado deletado com sucesso")
-        };
-      })
-      .catch(err => {
-        console.log(err.response);
-      })
-  }
-};
+
 
 // export const fetchGetByIdValorHaPagarActions = (id) => {
 //   // return new Promise(resolve => {
@@ -119,20 +191,7 @@ export const fetchPutValorHaPagarActions = (id, values) => {
   }
 }
 
-export const fetchPutValoresHaPagarInativacoaActions = (id, values) => {
-  return dispatch => {
-    http
-      .put(`/valoresHaPagarInativacao/${id}`, values)
-      .then(res => {
-        if (res.status === 200) {
-          console.log("Dado cadastro com sucesso")
-        }
-      })
-      .catch(err => {
-        console.log(err.response);
-      })
-  }
-}
+
 
 
 //------------------------------------------

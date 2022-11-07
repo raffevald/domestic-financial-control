@@ -1,0 +1,16 @@
+.NET 6 Web API 🔒 Create JSON Web Tokens (JWT) - User Registration / Login / Authentication
+https://www.youtube.com/watch?v=v7q3pEK1EA0&t=2s
+
+.Net 6 Web API | Minimal API Authentication (JWT)
+https://www.youtube.com/watch?v=BH-xCMDpu6o&t=897s
+
+Asp.Net Core WebSockets Vs SignalR. Which should you use? (Full Course)
+https://www.youtube.com/watch?v=ycVgXe6v1VQ
+
+In defence of .NET Minimal APIs | Refactoring
+https://www.youtube.com/watch?v=4ORO-KOufeU&t=377s
+
+DESENVOLVENDO UMA MINIMAL API COMPLETA
+https://www.youtube.com/watch?v=aXayqUfSNvw
+
+https://www.youtube.com/playlist?list=PLUOequmGnXxOgmSDWU7Tl6iQTsOtyjtwU

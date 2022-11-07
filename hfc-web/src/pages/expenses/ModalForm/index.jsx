@@ -1,8 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { FormularioDeCadastroEdicaoExpenses } from './FormularioDeCadastroEdicaoExpenses';
 import {  useSelector } from "react-redux";
+
+import { FormularioDeCadastroEdicaoExpenses } from './FormularioDeCadastroEdicaoExpenses';
 
 
 export const ModalForm = ({ openModal, closeModal }) => {

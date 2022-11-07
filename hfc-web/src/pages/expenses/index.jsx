@@ -2,31 +2,31 @@ import React, { useEffect , useState} from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { tokens } from "../../theme";
 import { useSelector, useDispatch } from "react-redux";
+
+import { ModalForm } from './ModalForm';
 import Header from '../../components/header';
-import {
-  fetchGetByIdValorHaPagarActions,
-  // fetchPutValoresHaPagarInativacoaActions,
-  fetchDeleteValorHaPagarActions,
-  fetchGetValorHaPagar,
-  fetchGetValorHaPagarAtivos
-} from "../../store/fetchActions/fetchValorHaPagarActions";
+import { ExpensesDataGrid } from './ExpensesDataGrid';
+import { ModalDeExclusao } from '../../components/modalDeExclusao';
+import { ModalDeInserirValorPago } from '../../components/modalDeInserirValorPago';
+
 import {
   fetchModalController
 } from '../../store/ducks/modalControlerDucks';
-import { ModalDeExclusao } from '../../components/modalDeExclusao';
-import { ModalForm } from './ModalForm';
 import {
   fetchModalControllerValorHaPagarByIdEditando,
   fetchModalControllerValorHaPagarIsEditando
 } from '../../store/ducks/valorHaPagarDucks';
-import { ExpensesDataGrid } from './ExpensesDataGrid';
-import { ModalDeInserirValorPago } from '../../components/modalDeInserirValorPago';
 import {
   fetchValoresHaPagarJaPagosModal,
   fetchModalControllerValoresHaPagarJaPagos
 } from '../../store/ducks/valoresHaPagarJaPagos';
 import { ModalAmountsPayableAlreadyPaid } from './AmountsPayableAlreadyPaid/index';
 import { fetchGetListaDeValoresJaPagos } from '../../store/fetchActions/fetchValoresHaPagarJaPagosActions';
+import {
+  fetchDeleteValorHaPagarActions,
+  fetchGetByIdValorHaPagarActions,
+  fetchGetValoresHaPagarAtivosByUserActions
+} from '../../store/fetchActions/fetchValorHaPagarActions';
 
 
 import './styles.css';
@@ -39,6 +39,7 @@ export const Expenses = () => {
   
   const modalControler = useSelector((state) => state.modalController.modalIsOpen);
   const modalListagemDeValoresPagos = useSelector((state) => state.valoresHaPagarJaPagos?.modalAmountsPayableAlreadyPaid);
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
   // const { loadingDefault } = useSelector((state) => state.loading?.status);
 
 
@@ -57,8 +58,8 @@ export const Expenses = () => {
   },[modalControler]);
 
   React.useEffect(() => {
-    dispatch(fetchGetValorHaPagarAtivos());
-  },[dispatch]);
+    dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo));
+  },[dispatch, usuarioLogado.codigo]);
 
   const handleClose = () => setOpenModal(false);
 
@@ -78,19 +79,10 @@ export const Expenses = () => {
     setCodigoDoValorHaPagarHaSerDeletado(idLinha);
     setCodigoDoValorHaPagarHaInativar(idLinha);
     setOpenModal(true);
-    // setIdASerExcluido(idLinha);
   };
 
   const handleExcluirSaida = () => {
     dispatch(fetchDeleteValorHaPagarActions(codigoDoValorHaPagarHaSerDeletado));
-    // const dadoHaInativar = [
-    //   {
-    //     "status_dados": 2,
-    //   }
-    // ];
-    // dispatch(fetchPutValoresHaPagarInativacoaActions(codigoDoValorHaPagarHaInativar, dadoHaInativar[0]));
-    
-    dispatch(fetchGetValorHaPagar());
     setOpenModal(false);
   };
 
