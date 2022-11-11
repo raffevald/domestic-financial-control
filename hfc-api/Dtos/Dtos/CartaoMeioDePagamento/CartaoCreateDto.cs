@@ -7,5 +7,7 @@ namespace hfc_api.Dtos.Dtos.CartaoMeioDePagamento
     public DateTime data_cadastro { get; set; }
     [Required]
     public String? descricao { get; set; }
+    [Required]
+    public int fk_usuario { get; set; }
   }
 }

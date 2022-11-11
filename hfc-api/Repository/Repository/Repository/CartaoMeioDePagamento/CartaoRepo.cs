@@ -35,9 +35,18 @@ namespace hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento
       }
       return cartao;
     }
-
     public async Task SaveChangesAsync() {
       await _context.SaveChangesAsync();
+    }
+
+    public IEnumerable<Cartao> GetAllCartaoByUser(int idUser) {
+      var cartao = _context!.cartaes!
+        .FromSqlRaw($"SELECT cartaes.* as cartoes FROM usuarios INNER JOIN cartaes ON usuarios.codigo = cartaes.fk_usuario WHERE usuarios.codigo = {idUser}")
+        .ToList();
+      if (cartao == null) {
+        throw new ArgumentNullException(nameof(cartao));
+      }
+      return cartao;
     }
   }
 }

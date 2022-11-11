@@ -8,5 +8,6 @@ namespace hfc_api.Repository.Repository.Interfaces.CartaoMeioDePagamento
     Task<IEnumerable<Cartao>> GetAllCartao();
     Task CreateCartao(Cartao cartao);
     void DeleteCartao(Cartao cartao);
+    IEnumerable<Cartao> GetAllCartaoByUser(int idUser);
   }
 }
