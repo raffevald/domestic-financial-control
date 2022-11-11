@@ -7,9 +7,11 @@ import { CardDataGrid } from './CardDataGrid';
 import { Cartoes } from './Cartoes';
 import { TipoDeCartao } from './TipoDeCartao';
 import { MeioDePagamento } from './MeioDePagamento';
+import { ModalDeExclusao } from '../../components/modalDeExclusao';
 
 import {
-  fetchGetMeioDePagamento
+  fetchGetMeioDePagamento,
+  fetchDeleteMeioDePagamento
 } from '../../store/fetchActions/fetchMeioDePagamento';
 import {
   fetchModalCadrastraCartoa,
@@ -22,22 +24,50 @@ export const CardPage = () => {
   const dispatch = useDispatch();
   
   const meioDePagamento = useSelector((state) => state?.meioDePagamento?.dadosMeioDePagamento);
-  
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
+
+  const [openModalDeleterMeansOfPayment, setOpenModalDeleterMeansOfPayment] = useState(false)
+
+  const [idDeleteMeansOfPayment, setIdDeleteMeansOfPayment] = useState();
+  const [idUpdateMeansOfPayment, setIdUpdateMeansOfPayment] = useState();
+  const [actionTypeOfMeansOfPayment, setActionTypeOfMeansOfPayment] = useState();
 
   React.useEffect(() => {
-    dispatch(fetchGetMeioDePagamento());
-  },[dispatch]);
+    dispatch(fetchGetMeioDePagamento(usuarioLogado.codigo));
+  },[dispatch, usuarioLogado.codigo]);
 
   const handelCartoes = () => {
     dispatch(fetchModalCadrastraCartoa(true));
   }
-
   const handelTipoDeCartoes = () => {
     dispatch(fetchModalCadrastraTipoCartoa(true));
   }
-
   const handleMeioDePagamento = () => {
     dispatch(fetchModalMeioDePagamento(true));
+    setActionTypeOfMeansOfPayment('insert');
+  }
+
+  const handleDelete = (id) => {
+    const idLinha = id.target.childNodes[1].textContent;
+
+    setOpenModalDeleterMeansOfPayment(true);
+    setIdDeleteMeansOfPayment(idLinha);
+  }
+  const handelDeleterMeansOfPayment = () => {
+    dispatch(fetchDeleteMeioDePagamento(idDeleteMeansOfPayment));
+
+    setOpenModalDeleterMeansOfPayment(false);
+  }
+  const handleCloseModalDeleterMeansOfPayment = () => {
+    setOpenModalDeleterMeansOfPayment(false);
+  }
+
+  const handleUpdateMeansOfPayment = (id) => {
+    const idLinha = id.target.childNodes[1].textContent;
+  
+    setIdUpdateMeansOfPayment(idLinha);
+    dispatch(fetchModalMeioDePagamento(true));
+    setActionTypeOfMeansOfPayment('update');
   }
 
   return (
@@ -74,11 +104,20 @@ export const CardPage = () => {
         </Box>
       <CardDataGrid
         dados={meioDePagamento}
+        handleExcluir={handleDelete}
+        handleUpdate={handleUpdateMeansOfPayment}
       />
 
       <Cartoes />
       <TipoDeCartao/>
-      <MeioDePagamento />
+      <MeioDePagamento idUpdateMeansOfPayment={idUpdateMeansOfPayment} actionTypeOfMeansOfPayment={actionTypeOfMeansOfPayment} />
+
+      <ModalDeExclusao
+        opelModal={openModalDeleterMeansOfPayment}
+        closeModal={handleCloseModalDeleterMeansOfPayment}
+        handleYes={handelDeleterMeansOfPayment}
+        codigoDoValorHaPagarHaInativar={idDeleteMeansOfPayment}  
+      />
 
     </Box>
   );

@@ -2,6 +2,7 @@ import React, { useEffect , useState} from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { tokens } from "../../theme";
 import { useSelector, useDispatch } from "react-redux";
+import ReactCardFlip from 'react-card-flip';
 
 import { ModalForm } from './ModalForm';
 import Header from '../../components/header';
@@ -42,11 +43,10 @@ export const Expenses = () => {
   const usuarioLogado = useSelector((state) => state.userDatas.values);
   // const { loadingDefault } = useSelector((state) => state.loading?.status);
 
-
   const [openModal, setOpenModal] = useState(false);
   const [openModalCadastrar, setOpenModalCadastrar] = useState(false);
   const [modalDeInserirValorPago, setModalDeInserirValorPago] = useState(false);
-  // const [gridCompleta, setGridCompleta] = useState(false);
+  const [gridCompleta, setGridCompleta] = useState(false);
   const [codigoDoValorHaPagarJaPago, setCodigoDoValorHaPagarJaPago] = useState();
   const [codigoDoValorHaPagarHaInativar, setCodigoDoValorHaPagarHaInativar] = useState();
   const [codigoDoValorDeListagemDosValoresPagos, setCodigoDoValorDeListagemDosValoresPagos] = useState();
@@ -120,6 +120,12 @@ export const Expenses = () => {
 
   return (
     <Box m="15px">
+      {/* <ReactCardFlip
+        isFlipped={gridCompleta}
+        flipDirection="vertical"
+      >
+
+      </ReactCardFlip> */}
       <Header
         title="DESPESAS"
         subtitle="Lista de todos os gastos"

@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   fetchModalCadrastraCartoa
@@ -16,6 +16,8 @@ export const CartoesForms = () => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
+
   const handleFormSubmit = (values) => {
     let data = new Date();
     let dia = String(data.getDate()).padStart(2, '0');
@@ -27,6 +29,7 @@ export const CartoesForms = () => {
     newValues.push({ 
       data_cadastro: dataAtual,
       descricao: values.descricao,
+      fk_usuario: usuarioLogado.codigo,
     });
 
     dispatch(fetchPostMeioDePagamentoCartao(newValues[0]));

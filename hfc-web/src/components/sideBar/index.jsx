@@ -33,6 +33,17 @@ const SideBar = () => {
   const theme = useTheme();
   
   const userDados = useSelector((state) => state.userDatas.values);
+  const userinfos = useSelector((state) => state.userDatas.userInfos[0]);
+  // const usuarioLogado = useSelector((state) => state.userDatas.values);
+  // console.log(userinfos?.email ? '' : userinfos.email);
+
+  const [email, setEmail] = useState('');
+
+  // if(userinfos !== undefined) {
+  //   setEmail(userinfos?.email);
+  // } 
+  // console.log(email);
+
 
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -79,6 +90,7 @@ const SideBar = () => {
               >
                 <Typography variant="h3" color={colors.grey[100]}>
                   {userDados.perfilUser.toUpperCase()}
+                  {/* {userinfos.perfil_do_usuario.toUpperCase()} */}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -96,6 +108,7 @@ const SideBar = () => {
                   height="100px"
                   // src={`../../assets/user.png`}
                   src={userDados.avatarUrl}
+                  // src={userinfos.vatar_url}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -107,9 +120,10 @@ const SideBar = () => {
                   sx={{ m: "10px 0 0 0" }}
                 >
                   { `${userDados.firstName} ${userDados.lastName}` }
+                  {/* { `${userinfos.primeiro_nome} ${userinfos.sobrenome}` } */}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  27/10/2022
+                  {/* {userinfos.email === undefined ? '' : userinfos.email } */}
                 </Typography>
               </Box>
             </Box>
@@ -151,14 +165,7 @@ const SideBar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Saídas Pagas"
-              to="/saidas/pagos"
-              icon={<MoneyOffCsredOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-            
+
           </Box>
         </Menu>
       </ProSidebar>

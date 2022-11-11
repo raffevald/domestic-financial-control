@@ -7,14 +7,6 @@ export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // const handleDados = () => {
-  //   return dados.map({item => {
-  //     const dadosFormatados = item;
-
-  //     return dadosFormatados;
-  //   }});
-  // };
-
   const handleDados = () => {
     const dadosTratados = [];
     for (let i = 0; i < dados?.length; i++) {
@@ -22,10 +14,6 @@ export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
         id: dados[i].codigo,
         cartao: dados[i].cartao,
         tipo: dados[i].tipo,
-
-        // excluir: dados[i].codigo,
-        // editar: dados[i].codigo,
-
       });
     };
     return dadosTratados;

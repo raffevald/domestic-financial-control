@@ -9,7 +9,7 @@ import {
 } from '../../../store/ducks/meioDePagamentoDucks';
 
 
-export const MeioDePagamento = () => {
+export const MeioDePagamento = ({ actionTypeOfMeansOfPayment, idUpdateMeansOfPayment }) => {
   const dispatch = useDispatch();
 
   const meioDePagamentoModal = useSelector((state) => state?.meioDePagamento?.modalMeioDePagamento);
@@ -44,7 +44,7 @@ export const MeioDePagamento = () => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <Box display="flex" justifyContent="center" mt="20px">
-              <MeioDePagamentoForm />
+              <MeioDePagamentoForm idUpdateMeansOfPayment={idUpdateMeansOfPayment} actionTypeOfMeansOfPayment={actionTypeOfMeansOfPayment} />
             </Box>
           </Typography>
         </Box>
