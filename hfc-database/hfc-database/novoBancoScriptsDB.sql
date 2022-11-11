@@ -145,14 +145,6 @@ CREATE VIEW ValoresHaPagar AS
 	GROUP BY valores_ha_pagar.Codigo, usuarios.codigo;
 	
 
-CREATE VIEW meioDePagamento AS
-	SELECT
-		meio_de_pagamento.codigo,
-		cartaes.descricao as cartao,
-		tipo_de_cartaes.descricao as tipo
-	FROM meio_de_pagamento
-	INNER JOIN cartaes ON cartaes.codigo = meio_de_pagamento.fk_cartao
-	INNER JOIN tipo_de_cartaes ON tipo_de_cartaes.codigo = meio_de_pagamento.fk_tipo_de_cartao;
 
 CREATE VIEW categoriaESubcategoria AS
 	SELECT
