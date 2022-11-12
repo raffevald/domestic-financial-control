@@ -8,6 +8,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlined from "@mui/icons-material/MoneyOffCsredOutlined";
 import CreditCard from "@mui/icons-material/CreditCard";
+import CategoryOutlined from "@mui/icons-material/CategoryOutlined";
 
 import "react-pro-sidebar/dist/css/styles.css";
 
@@ -33,11 +34,11 @@ const SideBar = () => {
   const theme = useTheme();
   
   const userDados = useSelector((state) => state.userDatas.values);
-  const userinfos = useSelector((state) => state.userDatas.userInfos[0]);
+  // const userinfos = useSelector((state) => state.userDatas.userInfos[0]);
   // const usuarioLogado = useSelector((state) => state.userDatas.values);
   // console.log(userinfos?.email ? '' : userinfos.email);
 
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
 
   // if(userinfos !== undefined) {
   //   setEmail(userinfos?.email);
@@ -148,6 +149,13 @@ const SideBar = () => {
               title="Cartões"
               to="/cartao"
               icon={<CreditCard />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Categorias"
+              to="/categorias"
+              icon={<CategoryOutlined />}
               selected={selected}
               setSelected={setSelected}
             />

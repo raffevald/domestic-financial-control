@@ -6,9 +6,8 @@ export const MeioDePagamento = createSlice({
     dadosCartao: [],
     dadosTipoCartao: [],
     dadosMeioDePagamento: [],
-    modalCadrastraCartoa: false,
-    modalCadrastraTipoCartoa: false,
-    modalMeioDePagamento: false
+    modalMeioDePagamento: false,
+    modalRegistrationCartoesCategoriasCartao: false
   },
   reducers: {
     fetchMeioDePagamentoCartao: (state, action) => {
@@ -20,14 +19,11 @@ export const MeioDePagamento = createSlice({
     fetchMeioDePagamento: (state, action) => {
       state.dadosMeioDePagamento = action.payload
     },
-    fetchModalCadrastraCartoa: (state, action) => {
-      state.modalCadrastraCartoa = action.payload
-    },
-    fetchModalCadrastraTipoCartoa: (state, action) => {
-      state.modalCadrastraTipoCartoa = action.payload
-    },
     fetchModalMeioDePagamento: (state, action) => {
       state.modalMeioDePagamento = action.payload
+    },
+    fetchModalRegistrationCartoesCategoriasCartao: (state, action) => {
+      state.modalRegistrationCartoesCategoriasCartao = action.payload
     },
   }
 });
@@ -36,7 +32,6 @@ export const {
   fetchMeioDePagamentoCartao,
   fetchMeioDePagamentoTipoCartao,
   fetchMeioDePagamento,
-  fetchModalCadrastraCartoa,
-  fetchModalCadrastraTipoCartoa,
-  fetchModalMeioDePagamento
+  fetchModalMeioDePagamento,
+  fetchModalRegistrationCartoesCategoriasCartao
 } = MeioDePagamento.actions;

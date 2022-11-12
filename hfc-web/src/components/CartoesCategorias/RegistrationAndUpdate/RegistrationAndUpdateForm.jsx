@@ -5,14 +5,17 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  fetchModalCadrastraTipoCartoa
-} from '../../../store/ducks/meioDePagamentoDucks';
-import {
-  fetchPostMeioDePagamentoTipoDeCartao
+  fetchPostMeioDePagamentoCartao,
+  fetchPostMeioDePagamentoTipoDeCartao,
+  fetchPutMeioDePagamentoCartaoActions,
+  fetchPutMeioDePagamentoTipoDeCartaoActions
 } from '../../../store/fetchActions/fetchMeioDePagamento';
 
 
-export const TipoDeCartaoForm = () => {
+export const RegistrationAndUpdateForm = ({
+  closeButtonModalRegistration, labelForm, nameButtonCadastrarRegistration,
+  tipoOfRegistration, actionTypeForRegistration, idForUpdateData
+}) => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
@@ -32,18 +35,25 @@ export const TipoDeCartaoForm = () => {
       fk_usuario: usuarioLogado.codigo,
     });
 
-    dispatch(fetchPostMeioDePagamentoTipoDeCartao(newValues[0]));
+    if ( actionTypeForRegistration === "update" ) {
+      if (tipoOfRegistration === "Cadastrar cartãoes") {
+        dispatch(fetchPutMeioDePagamentoCartaoActions(idForUpdateData, newValues[0]));
+      } else {
+        dispatch(fetchPutMeioDePagamentoTipoDeCartaoActions(idForUpdateData, newValues[0]));
+      }
+    } else {
+      if (tipoOfRegistration === "Cadastrar cartãoes") {
+        dispatch(fetchPostMeioDePagamentoCartao(newValues[0]));
+      } else {
+        dispatch(fetchPostMeioDePagamentoTipoDeCartao(newValues[0]));
+      }
+    }
 
-    dispatch(fetchModalCadrastraTipoCartoa(false));
-  };
-
-  const handleCloseModal = () => {
-    dispatch(fetchModalCadrastraTipoCartoa(false));
+    // dispatch(fetchModalRegistrationController(false));
   };
 
   return (
     <Box m="20px">
-      {/* <Header title={titulo} subtitle={subtitle} /> */}
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -70,7 +80,7 @@ export const TipoDeCartaoForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Insira o tipo de cartão"
+                label={labelForm}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.descricao}
@@ -82,11 +92,11 @@ export const TipoDeCartaoForm = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Cadastrar valor pago
+                {nameButtonCadastrarRegistration}
               </Button>
               <p className="spaço"></p>
               <Button
-                onClick={handleCloseModal}
+                onClick={closeButtonModalRegistration}
                 color="warning" variant="contained"
               >
                 Fechar

@@ -69,7 +69,6 @@ export const fetchGetMeioDePagamentoTipoCartao = (userId) => {
 //   };
 // };
 export const fetchGetMeioDePagamento = (userCodigo) => {
-  console.log('User filtro no serviecs: ',userCodigo);
   return dispatch => {
     http
       .post(`/cartao/tipo/meioDePagamentoByUser`, {userCodigo} )
@@ -143,10 +142,70 @@ export const fetchDeleteMeioDePagamento = (id) => {
   }
 }
 
+export const fetchDeleteMeioDePagamentoCartao = (id) => {
+  return dispatch => {
+    http
+      .delete(`/cartao/${id}`)
+      .then(res => {
+        if (res.statos === 200) {
+          console.log("Dado deletado com sucesso")
+        };
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+}
+
+export const fetchDeleteMeioDePagamentoTipoDeCartao = (id) => {
+  return dispatch => {
+    http
+      .delete(`/cartao/tipo/${id}`)
+      .then(res => {
+        if (res.statos === 200) {
+          console.log("Dado deletado com sucesso")
+        };
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+}
+
 export const fetchPutMeioDePagamentoActions = (id, values) => {
   return dispatch => {
     http
       .put(`/cartao/tipo/meioDePagamento/${id}`, values)
+      .then(res => {
+        if (res.status === 200) {
+          console.log("Dado cadastro com sucesso")
+        }
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+}
+
+export const fetchPutMeioDePagamentoCartaoActions = (id, values) => {
+  return dispatch => {
+    http
+      .put(`/cartao/${id}`, values)
+      .then(res => {
+        if (res.status === 200) {
+          console.log("Dado cadastro com sucesso")
+        }
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+}
+
+export const fetchPutMeioDePagamentoTipoDeCartaoActions = (id, values) => {
+  return dispatch => {
+    http
+      .put(`/cartao/tipo/${id}`, values)
       .then(res => {
         if (res.status === 200) {
           console.log("Dado cadastro com sucesso")
