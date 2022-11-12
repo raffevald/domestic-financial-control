@@ -172,6 +172,24 @@ app.MapPut("api/cartao/tipo/meioDePagamento/{id}", async (IMeioDePagamentoRepo m
   await meioDePagamentoRepo.SaveChangesAsync();
   return Results.NoContent();
 });
+app.MapPut("api/cartao/{id}", async (ICartaoRepo cartaoRepo, IMapper mapper, int id, CartaoUpdateDto cartaoUpdateDto) => {
+  var cartao = await cartaoRepo.GetCartaoId(id);
+  if(cartao == null) {
+    return Results.NotFound();
+  }
+  mapper.Map(cartaoUpdateDto, cartao);
+  await cartaoRepo.SaveChangesAsync();
+  return Results.NoContent();
+});
+app.MapPut("api/cartao/tipo/{id}", async (ITipoDeCartaoRepo tipoDeCartaoRepo, IMapper mapper, int id, TipoDeCartaoUpdateDto tipoDeCartaoUpdateDto) => {
+  var tipoDeCartao = await tipoDeCartaoRepo.GetTipoDeCartaoId(id);
+  if(tipoDeCartao == null) {
+    return Results.NotFound();
+  }
+  mapper.Map(tipoDeCartaoUpdateDto, tipoDeCartao);
+  await tipoDeCartaoRepo.SaveChangesAsync();
+  return Results.NoContent();
+});
 app.MapDelete("api/cartao/tipo/meioDePagamento/{id}", async (IMeioDePagamentoRepo meioDePagamentoRepo, IMapper mapper, int id) => {
   var meioDePagamento = await meioDePagamentoRepo.GetMeioDePagamentoById(id);
   if(meioDePagamento == null) {
@@ -179,6 +197,24 @@ app.MapDelete("api/cartao/tipo/meioDePagamento/{id}", async (IMeioDePagamentoRep
   }
   meioDePagamentoRepo.DeleteMeioDePagamento(meioDePagamento);
   await meioDePagamentoRepo.SaveChangesAsync();
+  return Results.Ok("Deleção bem sucedida");
+});
+app.MapDelete("api/cartao/{id}", async (ICartaoRepo cartaoRepo, IMapper mapper, int id) => {
+  var cartao = await cartaoRepo.GetCartaoId(id);
+  if(cartao == null) {
+    return Results.NotFound();
+  }
+  cartaoRepo.DeleteCartao(cartao);
+  await cartaoRepo.SaveChangesAsync();
+  return Results.Ok("Deleção bem sucedida");
+});
+app.MapDelete("api/cartao/tipo/{id}", async (ITipoDeCartaoRepo tipoDeCartaoRepo, IMapper mapper, int id) => {
+  var tipoDeCartao = await tipoDeCartaoRepo.GetTipoDeCartaoId(id);
+  if(tipoDeCartao == null) {
+    return Results.NotFound();
+  }
+  tipoDeCartaoRepo.DeleteTipoDeCartao(tipoDeCartao);
+  await tipoDeCartaoRepo.SaveChangesAsync();
   return Results.Ok("Deleção bem sucedida");
 });
 
@@ -201,30 +237,13 @@ var userInfos = usersInfosRepo.GetUserInfosByUserLogin(userGetInfosFiltros.email
 
 
 // // ainda não cheguei aqui
-// app.MapPut("api/cartao/{id}", async (ICartaoRepo cartaoRepo, IMapper mapper, int id, CartaoUpdateDto cartaoUpdateDto) => {
-//   var cartao = await cartaoRepo.GetCartaoId(id);
-//   if(cartao == null) {
-//     return Results.NotFound();
-//   }
-//   mapper.Map(cartaoUpdateDto, cartao);
-//   await cartaoRepo.SaveChangesAsync();
-//   return Results.NoContent();
-// });
+
 // app.MapGet("api/cartao/{id}", async (ICartaoRepo cartaoRepo, IMapper mapper, int id) => {
 //   var cartao = await cartaoRepo.GetCartaoId(id);
 //   if ( cartao != null ) {
 //     return Results.Ok(mapper.Map<CartaoReadDto>(cartao));
 //   }
 //   return Results.NotFound();
-// });
-// app.MapDelete("api/cartao/{id}", async (ICartaoRepo cartaoRepo, IMapper mapper, int id) => {
-//   var cartao = await cartaoRepo.GetCartaoId(id);
-//   if(cartao == null) {
-//     return Results.NotFound();
-//   }
-//   cartaoRepo.DeleteCartao(cartao);
-//   await cartaoRepo.SaveChangesAsync();
-//   return Results.Ok("Deleção bem sucedida");
 // });
 // app.MapGet("api/cartao/tipo/{id}", async (ITipoDeCartaoRepo tipoDeCartaoRepo, IMapper mapper, int id) => {
 //   var tipoDeCartao = await tipoDeCartaoRepo.GetTipoDeCartaoId(id);
@@ -233,24 +252,8 @@ var userInfos = usersInfosRepo.GetUserInfosByUserLogin(userGetInfosFiltros.email
 //   }
 //   return Results.NotFound();
 // });
-// app.MapPut("api/cartao/tipo/{id}", async (ITipoDeCartaoRepo tipoDeCartaoRepo, IMapper mapper, int id, TipoDeCartaoUpdateDto tipoDeCartaoUpdateDto) => {
-//   var tipoDeCartao = await tipoDeCartaoRepo.GetTipoDeCartaoId(id);
-//   if(tipoDeCartao == null) {
-//     return Results.NotFound();
-//   }
-//   mapper.Map(tipoDeCartaoUpdateDto, tipoDeCartao);
-//   await tipoDeCartaoRepo.SaveChangesAsync();
-//   return Results.NoContent();
-// });
-// app.MapDelete("api/cartao/tipo/{id}", async (ITipoDeCartaoRepo tipoDeCartaoRepo, IMapper mapper, int id) => {
-//   var tipoDeCartao = await tipoDeCartaoRepo.GetTipoDeCartaoId(id);
-//   if(tipoDeCartao == null) {
-//     return Results.NotFound();
-//   }
-//   tipoDeCartaoRepo.DeleteTipoDeCartao(tipoDeCartao);
-//   await tipoDeCartaoRepo.SaveChangesAsync();
-//   return Results.Ok("Deleção bem sucedida");
-// });
+
+
 
 
 app.Run("http://localhost:5000");
