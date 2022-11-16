@@ -2,19 +2,24 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
-  fetchModalCadrastraCartoa
-} from '../../../store/ducks/meioDePagamentoDucks';
-import {
-  fetchPostMeioDePagamentoCartao
+  fetchPostMeioDePagamentoCartao,
+  fetchPostMeioDePagamentoTipoDeCartao,
+  fetchPutMeioDePagamentoCartaoActions,
+  fetchPutMeioDePagamentoTipoDeCartaoActions
 } from '../../../store/fetchActions/fetchMeioDePagamento';
 
 
-export const CartoesForms = () => {
+export const RegistrationAndUpdateForm = ({
+  closeButtonModalRegistration, labelForm, nameButtonCadastrarRegistration,
+  tipoOfRegistration, actionTypeForRegistration, idForUpdateData
+}) => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
 
   const handleFormSubmit = (values) => {
     let data = new Date();
@@ -27,20 +32,28 @@ export const CartoesForms = () => {
     newValues.push({ 
       data_cadastro: dataAtual,
       descricao: values.descricao,
+      fk_usuario: usuarioLogado.codigo,
     });
 
-    dispatch(fetchPostMeioDePagamentoCartao(newValues[0]));
+    if ( actionTypeForRegistration === "update" ) {
+      if (tipoOfRegistration === "Cadastrar cartãoes") {
+        dispatch(fetchPutMeioDePagamentoCartaoActions(idForUpdateData, newValues[0]));
+      } else {
+        dispatch(fetchPutMeioDePagamentoTipoDeCartaoActions(idForUpdateData, newValues[0]));
+      }
+    } else {
+      if (tipoOfRegistration === "Cadastrar cartãoes") {
+        dispatch(fetchPostMeioDePagamentoCartao(newValues[0]));
+      } else {
+        dispatch(fetchPostMeioDePagamentoTipoDeCartao(newValues[0]));
+      }
+    }
 
-    dispatch(fetchModalCadrastraCartoa(false));
-  };
-
-  const handleCloseModal = () => {
-    dispatch(fetchModalCadrastraCartoa(false));
+    // dispatch(fetchModalRegistrationController(false));
   };
 
   return (
     <Box m="20px">
-      {/* <Header title={titulo} subtitle={subtitle} /> */}
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -67,7 +80,7 @@ export const CartoesForms = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Insira o cartão"
+                label={labelForm}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.descricao}
@@ -79,11 +92,11 @@ export const CartoesForms = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Cadastrar valor pago
+                {nameButtonCadastrarRegistration}
               </Button>
               <p className="spaço"></p>
               <Button
-                onClick={handleCloseModal}
+                onClick={closeButtonModalRegistration}
                 color="warning" variant="contained"
               >
                 Fechar

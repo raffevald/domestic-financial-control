@@ -12,23 +12,26 @@ import {
 import {
   fetchGetMeioDePagamentoCartao,
   fetchGetMeioDePagamentoTipoCartao,
+  fetchPostMeioDePagamento,
+  fetchPutMeioDePagamentoActions
 } from '../../../store/fetchActions/fetchMeioDePagamento';
 
 
-export const MeioDePagamentoForm = () => {
+export const MeioDePagamentoForm = ({ actionTypeOfMeansOfPayment, idUpdateMeansOfPayment }) => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const cartao = useSelector((state) => state?.meioDePagamento?.dadosCartao);
   const tipoCartao = useSelector((state) => state?.meioDePagamento?.dadosTipoCartao);
+  const usuarioLogado = useSelector((state) => state.userDatas.values);
 
   const [cartaoState, setCartaoState] = useState();
   const [tipoCartaoState, setTipoCartaoState] = useState();
 
   React.useEffect(() => {
-    dispatch(fetchGetMeioDePagamentoCartao());
-    dispatch(fetchGetMeioDePagamentoTipoCartao());
-  },[dispatch]);
+    dispatch(fetchGetMeioDePagamentoCartao(usuarioLogado.codigo));
+    dispatch(fetchGetMeioDePagamentoTipoCartao(usuarioLogado.codigo));
+  },[dispatch, usuarioLogado.codigo]);
 
   const handleFormSubmit = (values) => {
     let data = new Date();
@@ -41,10 +44,15 @@ export const MeioDePagamentoForm = () => {
     newValues.push({ 
       data_cadastro: dataAtual,
       fk_cartao: cartaoState,
-      fk_tipo_de_cartao: tipoCartaoState
+      fk_tipo_de_cartao: tipoCartaoState,
+      fk_usuario: usuarioLogado.codigo,
     });
-    // console.log(newValues);
-    // dispatch(fetchPostMeioDePagamentoTipoDeCartao(newValues[0]));
+
+    if (actionTypeOfMeansOfPayment === 'insert') {
+      dispatch(fetchPostMeioDePagamento(newValues[0]));
+    } else {
+      dispatch(fetchPutMeioDePagamentoActions(idUpdateMeansOfPayment, newValues[0]))
+    }
 
     dispatch(fetchModalMeioDePagamento(false));
   };
@@ -54,8 +62,6 @@ export const MeioDePagamentoForm = () => {
   const handleChangeTipoCartao = (event) => {
     setTipoCartaoState(event.target.value);
   };
-  // console.log('Cartão: ', cartaoState);
-  // console.log('Tipo de cartão: ', tipoCartaoState);
 
   const handleCloseModal = () => {
     dispatch(fetchModalMeioDePagamento(false));

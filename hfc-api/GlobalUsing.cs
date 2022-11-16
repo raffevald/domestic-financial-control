@@ -11,4 +11,10 @@ global using hfc_api.Dtos.Dtos.ValoresHaPagar;
 global using hfc_api.Repository.Repository.Interfaces.CartaoMeioDePagamento;
 global using hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento;
 global using hfc_api.Dtos.Dtos.CartaoMeioDePagamento;
-
+global using hfc_api.Models.FiltrosModels;
+global using hfc_api.Models.Usuarios;
+global using hfc_api.Models.UserInfosModels;
+global using hfc_api.Dtos.Dtos.UserInfosDtos;
+global using Microsoft.EntityFrameworkCore;
+global using hfc_api.Models.Views;
+global using System.ComponentModel.DataAnnotations;

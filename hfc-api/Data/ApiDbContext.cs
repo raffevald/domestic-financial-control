@@ -1,8 +1,3 @@
-global using Microsoft.EntityFrameworkCore;
-using hfc_api.Models;
-using hfc_api.Models.Views;
-using hfc_api.Models.CartaoMeioDePagamento;
-
 namespace hfc_api.Data
 {
     public class ApiDbContext : DbContext
@@ -15,5 +10,8 @@ namespace hfc_api.Data
       public DbSet<Cartao> cartaes => Set<Cartao>();
       public DbSet<TipoDeCartao> tipo_de_cartaes => Set<TipoDeCartao>();
       public DbSet<MeioDePagamentoViews> meiodepagamento => Set<MeioDePagamentoViews>();
+      public DbSet<MeioDePagamento> meio_de_pagamento => Set<MeioDePagamento>();
+      public DbSet<UserInfos> user_infos => Set<UserInfos>();
+      public DbSet<UserModel> usuarios => Set<UserModel>();
     }
 }

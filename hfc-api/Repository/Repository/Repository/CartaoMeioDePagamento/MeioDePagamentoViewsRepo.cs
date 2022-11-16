@@ -1,7 +1,3 @@
-using hfc_api.Data;
-using hfc_api.Models.CartaoMeioDePagamento;
-using hfc_api.Repository.Repository.Interfaces.CartaoMeioDePagamento;
-
 namespace hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento
 {
   public class MeioDePagamentoViewsRepo : IMeioDePagamentoViewsRepo
@@ -25,6 +21,15 @@ namespace hfc_api.Repository.Repository.Repository.CartaoMeioDePagamento
     }
     public async Task SaveChangesAsync() {
       await _context.SaveChangesAsync();
+    }
+    public IEnumerable<MeioDePagamentoViews> GetAllMeioDePagamentoViewsByUser(int idUser) {
+      var meioDePagamento = _context!.meiodepagamento!
+        .FromSqlRaw($"SELECT meiodepagamento.* as meioDePagamento FROM usuarios INNER JOIN meiodepagamento ON usuarios.codigo = meiodepagamento.usercoder WHERE usuarios.codigo = {idUser}")
+        .ToList();
+      if (meioDePagamento == null) {
+        throw new ArgumentNullException(nameof(meioDePagamento));
+      }
+      return meioDePagamento;
     }
   }
 }

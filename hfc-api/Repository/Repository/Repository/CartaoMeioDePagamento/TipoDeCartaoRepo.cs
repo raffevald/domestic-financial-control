@@ -39,5 +39,14 @@ namespace hfc_api.Repository.Repository.Repository
     public async Task SaveChangesAsync() {
       await _context.SaveChangesAsync();
     }
+    public IEnumerable<TipoDeCartao> GetAllTipoDeCartaoByUser(int idUser) {
+      var tipoDeCartaos = _context!.tipo_de_cartaes!
+        .FromSqlRaw($"SELECT tipo_de_cartaes.* as tipoDeCartao FROM usuarios INNER JOIN tipo_de_cartaes ON usuarios.codigo = tipo_de_cartaes.fk_usuario WHERE usuarios.codigo = {idUser}")
+        .ToList();
+      if (tipoDeCartaos == null) {
+        throw new ArgumentNullException(nameof(tipoDeCartaos));
+      }
+      return tipoDeCartaos;
+    }
   }
 }

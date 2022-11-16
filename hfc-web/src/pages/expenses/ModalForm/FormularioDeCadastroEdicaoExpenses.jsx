@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -9,6 +10,7 @@ import Header from '../../../components/header';
 import {
   fetchPostValorHaPagarActions,
   fetchPutValorHaPagarActions,
+  fetchGetValoresHaPagarAtivosByUserActions
 } from '../../../store/fetchActions/fetchValorHaPagarActions';
 import { fetchModalController } from '../../../store/ducks/modalControlerDucks';
 
@@ -20,6 +22,11 @@ export const FormularioDeCadastroEdicaoExpenses = ({ titulo="", subtitle="", dad
   const isEditando = useSelector((state) => state?.valorHaPagarDatas?.valorHaPagarIsEditando);
   const idLinhaEditar = useSelector((state) => state?.valorHaPagarDatas?.idValorHaPagarEditando);
   const usuarioLogado = useSelector((state) => state.userDatas.values);
+
+  React.useEffect(() => {
+    dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch, dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo)), usuarioLogado.codigo]);
 
   const handleFormSubmit = (values) => {
     const newValues = [];
@@ -39,6 +46,7 @@ export const FormularioDeCadastroEdicaoExpenses = ({ titulo="", subtitle="", dad
       dispatch(fetchPutValorHaPagarActions(idLinhaEditar, newValues[0]));
     } else {
       dispatch(fetchPostValorHaPagarActions(newValues[0]));
+      dispatch(fetchGetValoresHaPagarAtivosByUserActions(usuarioLogado.codigo));
     }
     
     dispatch(fetchModalController(false));

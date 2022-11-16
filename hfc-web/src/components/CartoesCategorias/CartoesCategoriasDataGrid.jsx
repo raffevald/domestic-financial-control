@@ -3,7 +3,11 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 
 
-export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
+export const CartoesCategoriasDataGrid = ({
+  handleExcluir, handleUpdate, dados,
+  pageColumnsField: { descricao },
+  pageColumnsHeaderName: { columnsHeaderName }
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -12,8 +16,7 @@ export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
     for (let i = 0; i < dados?.length; i++) {
       dadosTratados.push({
         id: dados[i].codigo,
-        cartao: dados[i].cartao,
-        tipo: dados[i].tipo,
+        descricao: dados[i].descricao,
       });
     };
     return dadosTratados;
@@ -28,16 +31,8 @@ export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
       align: "center",
     },
     {
-      field: "cartao",
-      headerName: "Cartão",
-      type: "number",
-      headerAlign: "center",
-      align: "center",
-      flex: 0.5,
-    },
-    {
-      field: "tipo",
-      headerName: "Tipo de Cartão",
+      field: descricao,
+      headerName: columnsHeaderName,
       type: "number",
       headerAlign: "center",
       align: "center",
@@ -114,7 +109,8 @@ export const CardDataGrid = ({handleExcluir, handleUpdate, dados }) => {
   return (
     <Box
       m="40px 0 0 0"
-      height="63vh"
+      height="60vh"
+      width="75vw"
       sx={{
         "& .MuiDataGrid-root": {
           border: "none",
