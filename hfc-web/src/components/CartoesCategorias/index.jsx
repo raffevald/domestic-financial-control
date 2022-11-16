@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { CartoesCategoriasDataGrid } from './CartoesCategoriasDataGrid';
 import { RegistrationAndUpdate } from './RegistrationAndUpdate';
+import { ModalDeExclusao } from '../modalDeExclusao';
 import Header from '../../components/header';
 
 import {
@@ -25,6 +26,8 @@ export const CartoesCategorias = ({
   const [tipoOfRegistration, setTipoOfRegistration ] = useState('');
   const [actionTypeRegistration, setActionTypeRegistration] = useState('');
   const [idForUpdateData, setIdForUpdateData]  = useState();
+  const [idForDelete, setIdForDelete] = useState();
+  const [handleModalExclusao, setHandleModalExclusao] = useState(false);
 
 
   const style = {
@@ -42,34 +45,42 @@ export const CartoesCategorias = ({
   const handleRegistration = () => {
     setOpenModalRegistration(true);
     setTipoOfRegistration(titleRegistration);
-  }
+  };
   const handleCloseModalRegistration = () => {
     setOpenModalRegistration(false);
-  }
+  };
   const closeButtonModalRegistration = () => {
     setOpenModalRegistration(false);
-  }
+  };
 
 
   const handleExcluir = (id) => {
     const idLinha = id.target.childNodes[1].textContent;
 
+    setIdForDelete(idLinha);
+    setHandleModalExclusao(true);
+  };
+  const handleCloseModalExclusao = () => {
+    setHandleModalExclusao(false);
+  };
+  const handleExclusao = () => {
     if ( titleRegistration === "Cadastrar cartãoes" ) {
-      dispatch(fetchDeleteMeioDePagamentoCartao(idLinha));
+      dispatch(fetchDeleteMeioDePagamentoCartao(idForDelete));
     } else if ( titleRegistration === "Cadastrar tipos de cartãoes" ) {
-      dispatch(fetchDeleteMeioDePagamentoTipoDeCartao(idLinha));
+      dispatch(fetchDeleteMeioDePagamentoTipoDeCartao(idForDelete));
     }
-  }
+
+    setHandleModalExclusao(false);
+  };
 
   const handleUpdate = (id) => {
     const idLinha = id.target.childNodes[1].textContent;
 
     setOpenModalRegistration(true);
     setTipoOfRegistration(titleRegistration);
-  
     setIdForUpdateData(idLinha);
     setActionTypeRegistration('update');
-  }
+  };
 
 
   return (
@@ -120,6 +131,11 @@ export const CartoesCategorias = ({
                 tipoOfRegistration={tipoOfRegistration}
                 actionTypeForRegistration={actionTypeRegistration}
                 idForUpdateData={idForUpdateData}
+              />
+              <ModalDeExclusao
+                opelModal={handleModalExclusao}
+                closeModal={handleCloseModalExclusao}
+                handleYes={handleExclusao}
               />
             </Box>
           </Typography>
