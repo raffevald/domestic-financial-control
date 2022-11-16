@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "3MMELD+Ak07u82zsMdjqosJOH8/Qw9y5ZsYzRSdKMiINJzm2dA2XVc/aKKy+kaxDPaxhIuFeFJfgRf3fqkyQZw==",
+  "success": true,
+  "projectFilePath": "C:\\evald\\projetos\\domestic-financial-control\\api-domestic-financial-control\\src\\WebUI\\WebUI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\rafael.evald\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
